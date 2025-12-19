@@ -1,22 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Love Site ❤️</title>
-  <style>
-    body {
-      background: linear-gradient(120deg, #ff758c, #ff7eb3);
-      color: white;
-      text-align: center;
-      font-family: Arial;
-      padding-top: 100px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bestfriend Game 💙💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #a1c4fd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  width: 320px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+  from {transform: scale(0.6); opacity: 0;}
+  to {transform: scale(1); opacity: 1;}
+}
+
+.avatars {
+  display: flex;
+  justify-content: space-around;
+  font-size: 60px;
+}
+
+button {
+  background: #ff6f91;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover {
+  background: #ff3f6c;
+}
+
+#msg {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.bar {
+  width: 100%;
+  height: 12px;
+  background: #eee;
+  border-radius: 10px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#ff6f91,#ff9671);
+  transition: width 0.5s;
+}
+
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: float 3s linear forwards;
+}
+
+@keyframes float {
+  0% {transform: translateY(0); opacity: 1;}
+  100% {transform: translateY(-300px); opacity: 0;}
+}
+</style>
 </head>
+
 <body>
 
-  <h1>❤️ Hello Love ❤️</h1>
-  <p>Ente GitHub website ready aanu 😄</p>
+<div class="card">
+  <h2>Best Friends Forever 💙💖</h2>
+
+  <div class="avatars">
+    <div>👦</div>
+    <div>👧</div>
+  </div>
+
+  <button onclick="play()">Click for Friendship</button>
+
+  <div id="msg">Tap the button 😄</div>
+
+  <div class="bar">
+    <div class="fill" id="fill"></div>
+  </div>
+</div>
+
+<script>
+let level = 0;
+const messages = [
+  "You both are cute besties 😍",
+  "Bestfriend goals 💫",
+  "Laugh together forever 😂",
+  "Trust level increased 🤝",
+  "Unbreakable friendship 💙💖"
+];
+
+function play() {
+  if (level < 100) level += 20;
+  document.getElementById("fill").style.width = level + "%";
+
+  document.getElementById("msg").innerText =
+    messages[Math.floor(Math.random() * messages.length)];
+
+  createHeart();
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerText = "💖";
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.bottom = "0px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 3000);
+}
+</script>
 
 </body>
 </html>
