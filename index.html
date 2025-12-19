@@ -1,142 +1,256 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bestfriend Game 💙💖</title>
+<title>Bestfriend Love Games 💙💖</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #a1c4fd);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3,#a18cd1);
+  min-height:100vh;
+  text-align:center;
+  overflow:hidden;
 }
 
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  text-align: center;
-  width: 320px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  animation: pop 0.8s ease;
+.container{
+  background:white;
+  margin:20px auto;
+  width:95%;
+  max-width:380px;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  animation:pop .6s ease;
 }
 
-@keyframes pop {
-  from {transform: scale(0.6); opacity: 0;}
-  to {transform: scale(1); opacity: 1;}
+@keyframes pop{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
-.avatars {
-  display: flex;
-  justify-content: space-around;
-  font-size: 60px;
+h2{
+  animation:pulse 2s infinite;
 }
 
-button {
-  background: #ff6f91;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 15px;
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
 }
 
-button:hover {
-  background: #ff3f6c;
+.menu button, .btn{
+  margin:6px;
+  padding:10px 16px;
+  border:none;
+  border-radius:25px;
+  background:#ff4f8b;
+  color:white;
+  font-size:14px;
+  cursor:pointer;
+  animation:bounce 2s infinite;
 }
 
-#msg {
-  margin-top: 15px;
-  font-size: 16px;
-  color: #333;
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
 }
 
-.bar {
-  width: 100%;
-  height: 12px;
-  background: #eee;
-  border-radius: 10px;
-  margin-top: 15px;
-  overflow: hidden;
+.game{display:none;margin-top:15px}
+.show{display:block}
+
+.bar{
+  width:100%;height:12px;background:#eee;border-radius:10px;
+}
+.fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,#ff4f8b,#ff8fab);
+  transition:.5s;
 }
 
-.fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg,#ff6f91,#ff9671);
-  transition: width 0.5s;
+.card{
+  display:inline-block;
+  width:60px;height:60px;
+  margin:5px;
+  font-size:30px;
+  line-height:60px;
+  background:#ffd6e8;
+  border-radius:15px;
+  cursor:pointer;
 }
 
-.heart {
-  position: absolute;
-  font-size: 24px;
-  animation: float 3s linear forwards;
+.heart{
+  position:absolute;
+  font-size:24px;
+  animation:float 4s linear forwards;
 }
-
-@keyframes float {
-  0% {transform: translateY(0); opacity: 1;}
-  100% {transform: translateY(-300px); opacity: 0;}
+@keyframes float{
+  from{bottom:-20px;opacity:1}
+  to{bottom:400px;opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2>Best Friends Forever 💙💖</h2>
+<div class="container">
+<h2>Bestfriend Love Games 💙💖</h2>
 
-  <div class="avatars">
-    <div>👦</div>
-    <div>👧</div>
-  </div>
+<div class="menu">
+<button onclick="openGame(0)">💖 Meter</button>
+<button onclick="openGame(1)">❓ Quiz</button>
+<button onclick="openGame(2)">💌 Memory</button>
+<button onclick="openGame(3)">🎁 Surprise</button>
+<button onclick="openGame(4)">🎭 Truth or Dare</button>
+</div>
 
-  <button onclick="play()">Click for Friendship</button>
+<!-- GAME 1 -->
+<div class="game show">
+<h3>Friendship Meter</h3>
+<button class="btn" onclick="meter()">Increase 💖</button>
+<p id="mmsg">Tap 😄</p>
+<div class="bar"><div class="fill" id="fill"></div></div>
+</div>
 
-  <div id="msg">Tap the button 😄</div>
+<!-- GAME 2 -->
+<div class="game">
+<h3>Bestfriend Quiz</h3>
+<p>What matters most?</p>
+<button class="btn" onclick="quiz('trust')">Trust 🤝</button>
+<button class="btn" onclick="quiz('money')">Money 💰</button>
+<p id="qmsg"></p>
+</div>
 
-  <div class="bar">
-    <div class="fill" id="fill"></div>
-  </div>
+<!-- GAME 3 -->
+<div class="game">
+<h3>Memory Match</h3>
+<div id="cards"></div>
+<p id="mm"></p>
+</div>
+
+<!-- GAME 4 -->
+<div class="game">
+<h3>Surprise Message 🎁</h3>
+<button class="btn" onclick="surprise()">Open 💝</button>
+<p id="smsg"></p>
+</div>
+
+<!-- GAME 5 -->
+<div class="game">
+<h3>Truth or Dare 🎭</h3>
+<button class="btn" onclick="truth()">Truth ❓</button>
+<button class="btn" onclick="dare()">Dare 🔥</button>
+<p id="tdmsg"></p>
+</div>
+
 </div>
 
 <script>
-let level = 0;
-const messages = [
-  "You both are cute besties 😍",
-  "Bestfriend goals 💫",
-  "Laugh together forever 😂",
-  "Trust level increased 🤝",
-  "Unbreakable friendship 💙💖"
-];
-
-function play() {
-  if (level < 100) level += 20;
-  document.getElementById("fill").style.width = level + "%";
-
-  document.getElementById("msg").innerText =
-    messages[Math.floor(Math.random() * messages.length)];
-
-  createHeart();
+let games=document.querySelectorAll('.game');
+function openGame(n){
+ games.forEach(g=>g.classList.remove('show'));
+ games[n].classList.add('show');
 }
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerText = "💖";
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.bottom = "0px";
-  document.body.appendChild(heart);
+/* GAME 1 */
+let lvl=0;
+function meter(){
+ if(lvl<100)lvl+=20;
+ document.getElementById("fill").style.width=lvl+"%";
+ document.getElementById("mmsg").innerText="Friendship "+lvl+"% 💖";
+ hearts();
+}
 
-  setTimeout(() => heart.remove(), 3000);
+/* GAME 2 */
+function quiz(a){
+ document.getElementById("qmsg").innerText=
+ a=="trust"?"Correct 💙":"Trust matters most 😄";
+ hearts();
+}
+
+/* GAME 3 */
+let emojis=["💖","💙","💖","💙"];
+let first=null,lock=false;
+function loadMemory(){
+ let c=document.getElementById("cards");
+ c.innerHTML="";
+ emojis.sort(()=>0.5-Math.random());
+ emojis.forEach(e=>{
+  let d=document.createElement("div");
+  d.className="card";
+  d.innerText="❓";
+  d.onclick=()=>flip(d,e);
+  c.appendChild(d);
+ });
+}
+function flip(d,e){
+ if(lock||d.innerText!="❓")return;
+ d.innerText=e;
+ if(!first){first={d,e};}
+ else{
+  lock=true;
+  setTimeout(()=>{
+   if(first.e!=e){
+    first.d.innerText="❓";
+    d.innerText="❓";
+   }else{
+    document.getElementById("mm").innerText="Perfect Match 💖";
+    hearts();
+   }
+   first=null;lock=false;
+  },700);
+ }
+}
+loadMemory();
+
+/* GAME 4 */
+const sur=[
+ "Bestfriends forever 💙",
+ "Laugh together 😂",
+ "Cute bond 💖",
+ "Unbreakable trust 🤝"
+];
+function surprise(){
+ document.getElementById("smsg").innerText=
+ sur[Math.floor(Math.random()*sur.length)];
+ hearts();
+}
+
+/* GAME 5 Truth or Dare */
+const truths=[
+ "Who is your bestfriend crush? 😜",
+ "Who texts first usually? 📱",
+ "One thing you love about them 💙",
+ "Most funny memory together 😂"
+];
+const dares=[
+ "Send a 💖 emoji now",
+ "Smile and think about them 😊",
+ "Send a cute message later 💌",
+ "Take a selfie with a smile 😄"
+];
+function truth(){
+ document.getElementById("tdmsg").innerText=
+ truths[Math.floor(Math.random()*truths.length)];
+ hearts();
+}
+function dare(){
+ document.getElementById("tdmsg").innerText=
+ dares[Math.floor(Math.random()*dares.length)];
+ hearts();
+}
+
+/* Love hearts animation */
+function hearts(){
+ for(let i=0;i<3;i++){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerText=["💖","💕","💘"][Math.floor(Math.random()*3)];
+  h.style.left=Math.random()*innerWidth+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+ }
 }
 </script>
 
